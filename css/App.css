@@ -1,5 +1,6 @@
 .App {
-  text-align: center;
+  font-family: 'HelveticaNeue', Helvetica, Arial, sans-serif;
+  padding: 0 20px;
 }
 
 .App-logo {
@@ -8,8 +9,8 @@
 }
 
 .App-header {
+  text-align: center;
   background-color: #222;
-  height: 150px;
   padding: 20px;
   color: white;
 }

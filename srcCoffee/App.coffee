@@ -1,16 +1,29 @@
 React = require 'react'
-@import '../css/App.css'
+ShoppingList = require('./shoppingList').f
+require '../css/App.css'
 
-{div} = React.DOM
+{div, h2} = React.DOM
 
 
 App = React.createClass
 
   render: ->
     div {
-      className: 'application'
-      onKeyDown: @stopDefaults
-    }, "THis is a test"
+      key: "app"
+      className: "App"
+    }, [
+      div {
+        key: 'app-header'
+        className: 'App-header'
+      }, "Grocery Lists"
+      h2 {
+        key: "title"
+      }, "WHOLE FOODS"
+      ShoppingList {
+        key: "shopping-list"
+      }
+    ]
+
 
 
 module.exports =

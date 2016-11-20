@@ -1,7 +1,7 @@
-import React from 'react'
-# import GroceryItem from './groceryItem.js'
+React = require 'react'
+GroceryItem = require('./groceryItem').f
 
-{div} = React.DOM
+{div, ul} = React.DOM
 
 ShoppingList = React.createClass
 
@@ -13,11 +13,23 @@ ShoppingList = React.createClass
     }
 
   render: ->
+    {items} = @state
+
+    list = []
+
+    for item in items
+      list.push GroceryItem {
+        key: item
+        product: item
+      }
+
     div {
-      className: 'shopping-list'
-    }, 'THIS IS  ATEST'
+      key: "list"
+    }, ul {
+        className: 'shopping-list'
+      }, list
 
 
 module.exports =
-c: ShoppingList
-f: React.createFactory(ShoppingList)
+  c: ShoppingList
+  f: React.createFactory ShoppingList
