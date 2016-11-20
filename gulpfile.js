@@ -1,11 +1,3 @@
-// var gulp = require('gulp');
-
-// var browserify = require('browserify');
-
-// gulp.task('default', function() {
-//   console.log("this is a test");
-// });
-
 var gulp = require('gulp');
 var coffee = require('gulp-coffee');
 var changed = require('gulp-changed');
