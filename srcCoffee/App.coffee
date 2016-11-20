@@ -1,6 +1,6 @@
 React = require 'react'
 # GroceryList = require('./groceryList').f
-Stores = require('./stores').f
+Groceries = require('./groceries').f
 require '../css/App.css'
 
 {div, h2} = React.DOM
@@ -17,15 +17,9 @@ App = React.createClass
         key: 'app-header'
         className: 'App-header'
       }, "Grocery Lists"
-      Stores {
+      Groceries {
         key: 'stores'
       }
-      # h2 {
-      #   key: "grocery-title"
-      # }, "WHOLE FOODS"
-      # GroceryList {
-      #   key: "grocery-list"
-      # }
     ]
 
 

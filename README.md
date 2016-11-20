@@ -197,3 +197,11 @@ gulp
 After we run gulp we can start the application 
 
 npm start
+
+So we do not have to run gulp each time to compile the coffeescript add the task to the start in the package.json
+
+scripts": {
+    "start": "npm run client-compiler & react-scripts start",
+    "client-compiler": "gulp client-compiler",...}
+
+The client-compiler will run the coffe-watch and recompile the coffeescript if it changes. 

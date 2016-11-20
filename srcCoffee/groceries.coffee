@@ -8,6 +8,7 @@ Groceries = React.createClass
   displayName: 'Groceries'
 
   getInitialState: ->
+    # this should come from a db and then use Flux to grab the data
     {
       groceryStores: [
         {

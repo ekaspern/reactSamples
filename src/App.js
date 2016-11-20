@@ -1,10 +1,8 @@
-var App, GroceryList, React, Stores, div, h2, ref;
+var App, Groceries, React, div, h2, ref;
 
 React = require('react');
 
-GroceryList = require('./groceryList').f;
-
-Stores = require('./stores').f;
+Groceries = require('./groceries').f;
 
 require('../css/App.css');
 
@@ -19,7 +17,7 @@ App = React.createClass({
       div({
         key: 'app-header',
         className: 'App-header'
-      }, "Grocery Lists"), Stores({
+      }, "Grocery Lists"), Groceries({
         key: 'stores'
       })
     ]);

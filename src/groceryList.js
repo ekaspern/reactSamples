@@ -8,17 +8,12 @@ ref = React.DOM, div = ref.div, ul = ref.ul;
 
 GroceryList = React.createClass({
   displayName: 'GroceryList',
-  getInitialState: function() {
-    return {
-      items: ['Peanut Butter', 'Eggs', 'Yogurt']
-    };
-  },
   render: function() {
-    var i, item, items, len, list;
-    items = this.state.items;
+    var i, item, len, list, products;
+    products = this.props.products;
     list = [];
-    for (i = 0, len = items.length; i < len; i++) {
-      item = items[i];
+    for (i = 0, len = products.length; i < len; i++) {
+      item = products[i];
       list.push(GroceryItem({
         key: item,
         product: item

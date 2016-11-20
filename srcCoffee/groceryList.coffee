@@ -7,17 +7,13 @@ GroceryList = React.createClass
 
   displayName: 'GroceryList'
 
-  getInitialState: ->
-    {
-      items: ['Peanut Butter', 'Eggs', 'Yogurt']
-    }
 
   render: ->
-    {items} = @state
+    {products} = @props
 
     list = []
 
-    for item in items
+    for item in products
       list.push GroceryItem {
         key: item
         product: item
