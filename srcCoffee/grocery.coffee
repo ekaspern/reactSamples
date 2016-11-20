@@ -3,9 +3,9 @@ GroceryList = require('./groceryList').f
 
 {div, h2} = React.DOM
 
-Store = React.createClass
+Grocery = React.createClass
 
-  displayName: 'Store'
+  displayName: 'Grocery'
 
   getInitialState: ->
     {
@@ -16,8 +16,6 @@ Store = React.createClass
     {store} = @props
     {id, name, products} = store
     {showList} = @state
-
-    console.log "showList", showList
 
     div {}, [
       h2 {
@@ -40,5 +38,5 @@ Store = React.createClass
 
 
 module.exports =
-c: Store
-f: React.createFactory Store
+c: Grocery
+f: React.createFactory Grocery

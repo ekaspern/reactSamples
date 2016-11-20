@@ -1,5 +1,5 @@
 React = require 'react'
-GroceryList = require('./groceryList').f
+# GroceryList = require('./groceryList').f
 Stores = require('./stores').f
 require '../css/App.css'
 
