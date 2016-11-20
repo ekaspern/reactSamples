@@ -2,7 +2,7 @@ import React from 'react';
 import GroceryItem from './groceryItem.js'
 
 
-class ShoppingList extends React.Component {
+class GroceryList extends React.Component {
 
   constructor() {
     super();
@@ -14,8 +14,8 @@ class ShoppingList extends React.Component {
   render() {
 
     return (
-      <div className="shopping-list">
-        <h1>Shopping List for {this.props.name}</h1>
+      <div className="grocery-list">
+        <h1>{this.props.name}</h1>
         <ul>
           {this.state.items.map(function(item, i){
             return <GroceryItem item={item} key={i} />;
@@ -26,4 +26,4 @@ class ShoppingList extends React.Component {
   }
 }
 
-export default ShoppingList;
+export default GroceryList;
