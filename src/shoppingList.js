@@ -1,29 +1,24 @@
+var ShoppingList, div;
+
 import React from 'react';
-import GroceryItem from './groceryItem.js'
 
+div = React.DOM.div;
 
-class ShoppingList extends React.Component {
-
-  constructor() {
-    super();
-    this.state = {
-      items: ['Peanut Butter', 'Eggs', 'Yogurt'],
+ShoppingList = React.createClass({
+  displayName: 'ShoppingList',
+  getInitialState: function() {
+    return {
+      items: ['Peanut Butter', 'Eggs', 'Yogurt']
     };
+  },
+  render: function() {
+    return div({
+      className: 'shopping-list'
+    }, 'THIS IS  ATEST');
   }
+});
 
-  render() {
-
-    return (
-      <div className="shopping-list">
-        <h1>Shopping List for {this.props.name}</h1>
-        <ul>
-          {this.state.items.map(function(item, i){
-            return <GroceryItem item={item} key={i} />;
-          })}
-        </ul>
-      </div>
-    );
-  }
-}
-
-export default ShoppingList;
+module.exports = {
+  c: ShoppingList,
+  f: React.createFactory(ShoppingList)
+};

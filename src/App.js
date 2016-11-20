@@ -1,26 +1,19 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import ShoppingList from './shoppingList.js'
+var App, React, div;
 
+React = require('react');
 
-class App extends Component {
+div = React.DOM.div;
 
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>React Example</h2>
-        </div>
-        <p id="test" className="App-intro" >
-          Looping over a list.
-        </p>
-        <ShoppingList name="Whole Foods" />
-      </div>
-      
-    );
+App = React.createClass({
+  render: function() {
+    return div({
+      className: 'application',
+      onKeyDown: this.stopDefaults
+    }, "THis is a test");
   }
-}
+});
 
-export default App;
+module.exports = {
+  c: App,
+  f: React.createFactory(App)
+};

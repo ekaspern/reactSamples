@@ -1,10 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+var App, React, ReactDOM;
 
-import './index.css';
+React = require('react');
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+ReactDOM = require('react-dom');
+
+App = require('./App').f;
+
+ReactDOM.render(React.createElement(App), document.getElementById('root'));
