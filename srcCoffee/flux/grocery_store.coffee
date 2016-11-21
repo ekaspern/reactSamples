@@ -9,6 +9,7 @@ module.exports = Flux.createStore
     'set-grocery-stores': 'setGroceryStores'
     'get-current-list': 'getCurrentList'
     'set-grocery-list': 'setGroceryList'
+    'add-grocery-list-list': 'addGroceryListItem'
     
   
   scheme:
@@ -16,6 +17,10 @@ module.exports = Flux.createStore
       default: []
     currentList:
       default: []
+    currentColor:
+      default: null
+    currentStore:
+      default: null
     loading: 
       default: null
 
@@ -30,9 +35,12 @@ module.exports = Flux.createStore
     store = _.find(groceryStores, {id: id})
 
     list = store.products
+    color = store.color
 
     @set
       currentList: list
+      currentColor: color
+      currentStore: id
     
   setGroceryList: (options) ->
     {index, data} = options
@@ -41,4 +49,17 @@ module.exports = Flux.createStore
 
     @set
       groceryStores: @state.groceryStores
+
+  addGroceryListItem: (options) ->
+    {id, listname} = options
+    {groceryStores} = @state
+
+    store = _.find(groceryStores, {id: id})
+
+    store.products.push listname
+
+    @set
+      groceryStores: groceryStores
+
+
 

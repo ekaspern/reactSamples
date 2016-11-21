@@ -3,7 +3,7 @@ Grocery = require('./grocery').f
 GroceryItem = require('./groceryItem').f
 {Flux} = require 'delorean'
 
-{div, h2} = React.DOM
+{div, h2, ul, input} = React.DOM
 
 Groceries = React.createClass
 
@@ -13,9 +13,15 @@ Groceries = React.createClass
 
   displayName: 'Groceries'
 
+  getInitialState: ->
+    {
+      newList: null
+    }
+
 
   render: ->
-    {groceryStores, currentList} = @getStore 'grocery'
+    {groceryStores, currentList, currentColor} = @getStore 'grocery'
+    {newList} = @state
 
     stores = []
     displayItems = []
@@ -31,9 +37,9 @@ Groceries = React.createClass
 
     # if a list was set on the store
     if currentList?
-      for item in currentList
+      for item in currentList 
         displayItems.push GroceryItem {
-          key: item
+          key: "item#{item}"
           product: item
         }
 
@@ -50,9 +56,25 @@ Groceries = React.createClass
         className: 'current-list'
       }, [
         h2 {
-          key: 'title'
+          key: 'current-title'
+          style: 
+            color: currentColor
         }, "Current List"
-        displayItems 
+        ul {
+          key: 'current-list'
+        }, displayItems 
+        input {
+          key: 'input-add'
+          type: 'text'
+          ref: 'listname'
+          value: newList or ''
+          onChange: @handleChange
+        }
+        div {
+          key: 'button-add'
+          className: 'list-add'
+          onClick: @handleAddClick
+        }, "Add to Current List"
       ] if currentList.length  
     ]
 
@@ -60,6 +82,24 @@ Groceries = React.createClass
   handleStoreClick: (id) ->
     @trigger 'getCurrentList', id
 
+  handleAddClick: () ->
+    {currentStore} = @getStore 'grocery'
+    newlistname = @refs.listname.value
+    @trigger 'addGroceryListItem', {id: currentStore, listname:  newlistname}, @clearInput
+
+  handleChange: (e) ->
+    {value} = e.target
+
+    @setState {
+      newList: value
+    }
+
+  clearInput: ->
+    @setState {
+      newList: null
+    }
+
+ 
 
 
 

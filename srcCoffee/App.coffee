@@ -21,16 +21,19 @@ App = React.createClass
           id: 1
           name: 'Whole Foods'
           products: ['Peanut Butter', 'Eggs', 'Yogurt']
+          color: 'green'
         },
         {
           id: 2
           name: 'Harvest Coop'
           products: ['Hummus', 'Ice cream', 'Bread']
+          color: 'blue'
         },
         {
           id: 3
           name: 'Trader Joes'
           products: ['Potato Chips', 'Trail Mix', 'Seltzer']
+          color: 'red'
         }
       ]
 

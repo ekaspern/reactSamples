@@ -13,7 +13,7 @@ module.exports = {
     'getGroceryStores': 'getGroceryStores',
     'setGroceryStores': 'setGroceryStores',
     'getCurrentList': 'getCurrentList',
-    'setGroceryList': 'setGroceryList'
+    'addGroceryListItem': 'addGroceryListItem'
   },
   getGroceryStores: function(cb) {
     console.log("test");
@@ -27,13 +27,15 @@ module.exports = {
       };
     })(this));
   },
-  setGroceryStores: function(data, cb) {
+  setGroceryStores: function(data) {
     return this.dispatch('set-grocery-stores', data);
   },
   getCurrentList: function(id) {
     return this.dispatch('get-current-list', id);
   },
-  setGroceryList: function(options) {
-    return this.dispatch('set-grocery-list', options);
+  addGroceryListItem: function(options, cb) {
+    return this.dispatch('add-grocery-list-list', options).then(function() {
+      return typeof cb === "function" ? cb() : void 0;
+    });
   }
 };

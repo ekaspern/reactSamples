@@ -9,7 +9,7 @@ module.exports =
     'getGroceryStores': 'getGroceryStores'
     'setGroceryStores': 'setGroceryStores'
     'getCurrentList': 'getCurrentList'
-    'setGroceryList': 'setGroceryList'
+    'addGroceryListItem': 'addGroceryListItem'
     
   getGroceryStores: (cb) -> 
     console.log "test"
@@ -19,13 +19,14 @@ module.exports =
       @dispatch('set-grocery-stores', res)
       .then -> cb?()
 
-  setGroceryStores: (data, cb) ->
+  setGroceryStores: (data) ->
     @dispatch('set-grocery-stores', data)
 
   getCurrentList: (id) ->
     @dispatch('get-current-list', id)
 
-  setGroceryList: (options) ->
-    @dispatch('set-grocery-list', options)
+  addGroceryListItem: (options, cb) ->
+    @dispatch('add-grocery-list-list', options)
+    .then -> cb?()
 
   

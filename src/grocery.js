@@ -14,16 +14,18 @@ Grocery = React.createClass({
     };
   },
   render: function() {
-    var id, name, products, showList, store;
+    var color, id, name, products, showList, store;
     store = this.props.store;
-    console.log("store", store);
-    id = store.id, name = store.name, products = store.products;
+    id = store.id, name = store.name, products = store.products, color = store.color;
     showList = this.state.showList;
     return div({}, [
       h2({
         key: id,
         className: 'store',
-        onClick: this.handleClick
+        onClick: this.handleClick,
+        style: {
+          color: color
+        }
       }, name), showList ? GroceryList({
         key: 'products',
         className: 'products-list',
@@ -35,7 +37,6 @@ Grocery = React.createClass({
     var handleStoreClick, id, ref1, store;
     ref1 = this.props, handleStoreClick = ref1.handleStoreClick, store = ref1.store;
     id = store.id;
-    console.log("id", id);
     handleStoreClick(id);
     return this.setState({
       showList: true

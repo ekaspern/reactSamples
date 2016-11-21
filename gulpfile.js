@@ -47,7 +47,7 @@ gulp.task('coffee-watch', function(done) {
   return coffeeCompile(done);
 });
 
-// gulp.task('default', ['coffee-watch']);
+gulp.task('default', ['coffee-watch']);
 
 gulp.task('client-compiler', ['coffee-watch']);
 

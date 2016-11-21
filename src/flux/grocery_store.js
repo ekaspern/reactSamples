@@ -10,7 +10,8 @@ module.exports = Flux.createStore({
   actions: {
     'set-grocery-stores': 'setGroceryStores',
     'get-current-list': 'getCurrentList',
-    'set-grocery-list': 'setGroceryList'
+    'set-grocery-list': 'setGroceryList',
+    'add-grocery-list-list': 'addGroceryListItem'
   },
   scheme: {
     groceryStores: {
@@ -18,6 +19,12 @@ module.exports = Flux.createStore({
     },
     currentList: {
       "default": []
+    },
+    currentColor: {
+      "default": null
+    },
+    currentStore: {
+      "default": null
     },
     loading: {
       "default": null
@@ -27,14 +34,17 @@ module.exports = Flux.createStore({
     return this.set('groceryStores', data);
   },
   getCurrentList: function(id) {
-    var groceryStores, list, store;
+    var color, groceryStores, list, store;
     groceryStores = this.state.groceryStores;
     store = _.find(groceryStores, {
       id: id
     });
     list = store.products;
+    color = store.color;
     return this.set({
-      currentList: list
+      currentList: list,
+      currentColor: color,
+      currentStore: id
     });
   },
   setGroceryList: function(options) {
@@ -43,6 +53,18 @@ module.exports = Flux.createStore({
     this.state.groceryStores[index].products = data;
     return this.set({
       groceryStores: this.state.groceryStores
+    });
+  },
+  addGroceryListItem: function(options) {
+    var groceryStores, id, listname, store;
+    id = options.id, listname = options.listname;
+    groceryStores = this.state.groceryStores;
+    store = _.find(groceryStores, {
+      id: id
+    });
+    store.products.push(listname);
+    return this.set({
+      groceryStores: groceryStores
     });
   }
 });
