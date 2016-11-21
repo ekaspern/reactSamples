@@ -1,8 +1,9 @@
 React = require 'react'
 Grocery = require('./grocery').f
+GroceryItem = require('./groceryItem').f
 {Flux} = require 'delorean'
 
-{div} = React.DOM
+{div, h2} = React.DOM
 
 Groceries = React.createClass
 
@@ -13,46 +14,53 @@ Groceries = React.createClass
   displayName: 'Groceries'
 
 
-  # getInitialState: ->
-  #   # this should come from a db and then use Flux to grab the data
-  #   {
-  #     groceryStores: [
-  #       {
-  #         id: 1
-  #         name: 'Whole Foods'
-  #         products: ['Peanut Butter', 'Eggs', 'Yogurt']
-  #       },
-  #       {
-  #         id: 2
-  #         name: 'Harvest Coop'
-  #         products: ['Hummus', 'Ice cream', 'Bread']
-  #       },
-  #       {
-  #         id: 3
-  #         name: 'Trader Joes'
-  #         products: ['Potato Chips', 'Trail Mix', 'Seltzer']
-  #       }
-  #     ] 
-  #   }
-
   render: ->
-    {groceryStores} = @getStore 'grocery'
-
-    console.log "groceryStores", groceryStores
+    {groceryStores, currentList} = @getStore 'grocery'
 
     stores = []
+    displayItems = []
 
     for store in groceryStores
       {id} = store
-      
+
       stores.push Grocery {
         key: id
         store: store
+        handleStoreClick: @handleStoreClick
       }
+
+    # if a list was set on the store
+    if currentList?
+      for item in currentList
+        displayItems.push GroceryItem {
+          key: item
+          product: item
+        }
+
 
     div {
       key: "list"
-    }, stores
+    }, [
+      div {
+        key: "store"
+        className: 'grocery-stores'
+      }, stores
+      div {
+        key: "store-list"
+        className: 'current-list'
+      }, [
+        h2 {
+          key: 'title'
+        }, "Current List"
+        displayItems 
+      ] if currentList.length  
+    ]
+
+
+  handleStoreClick: (id) ->
+    @trigger 'getCurrentList', id
+
+
 
 
 module.exports =

@@ -8,6 +8,7 @@ module.exports =
   viewTriggers:
     'getGroceryStores': 'getGroceryStores'
     'setGroceryStores': 'setGroceryStores'
+    'getCurrentList': 'getCurrentList'
     'setGroceryList': 'setGroceryList'
     
   getGroceryStores: (cb) -> 
@@ -20,6 +21,9 @@ module.exports =
 
   setGroceryStores: (data, cb) ->
     @dispatch('set-grocery-stores', data)
+
+  getCurrentList: (id) ->
+    @dispatch('get-current-list', id)
 
   setGroceryList: (options) ->
     @dispatch('set-grocery-list', options)

@@ -12,6 +12,7 @@ module.exports = {
   viewTriggers: {
     'getGroceryStores': 'getGroceryStores',
     'setGroceryStores': 'setGroceryStores',
+    'getCurrentList': 'getCurrentList',
     'setGroceryList': 'setGroceryList'
   },
   getGroceryStores: function(cb) {
@@ -28,6 +29,9 @@ module.exports = {
   },
   setGroceryStores: function(data, cb) {
     return this.dispatch('set-grocery-stores', data);
+  },
+  getCurrentList: function(id) {
+    return this.dispatch('get-current-list', id);
   },
   setGroceryList: function(options) {
     return this.dispatch('set-grocery-list', options);

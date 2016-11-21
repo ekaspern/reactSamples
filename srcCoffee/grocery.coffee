@@ -14,6 +14,7 @@ Grocery = React.createClass
 
   render: ->
     {store} = @props
+    console.log "store", store
     {id, name, products} = store
     {showList} = @state
 
@@ -32,8 +33,15 @@ Grocery = React.createClass
     
 
   handleClick: ->
+    {handleStoreClick, store} = @props
+    {id} = store
+    console.log "id", id
+
+    handleStoreClick(id)
+
     @setState 
       showList: yes
+    
     
 
 
