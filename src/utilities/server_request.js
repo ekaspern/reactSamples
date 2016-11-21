@@ -13,7 +13,6 @@ module.exports = Request = (function() {
     onTimeout: null,
     authenticate: true,
     responseType: null,
-    requestName: null,
     contentType: null
   };
 
@@ -62,8 +61,8 @@ module.exports = Request = (function() {
   };
 
   Request.prototype.start = function() {
-    var authenticate, binaryResponse, contentType, data, endpoint, error, headers, k, method, onTimeout, payload, ref, requestName, requestTimer, responseType, success, timeout, url, v;
-    ref = this.options, method = ref.method, data = ref.data, headers = ref.headers, url = ref.url, timeout = ref.timeout, onTimeout = ref.onTimeout, error = ref.error, success = ref.success, requestName = ref.requestName, authenticate = ref.authenticate, responseType = ref.responseType, contentType = ref.contentType;
+    var authenticate, binaryResponse, contentType, data, endpoint, error, headers, k, method, onTimeout, payload, ref, requestTimer, responseType, success, timeout, url, v;
+    ref = this.options, method = ref.method, data = ref.data, headers = ref.headers, url = ref.url, timeout = ref.timeout, onTimeout = ref.onTimeout, error = ref.error, success = ref.success, authenticate = ref.authenticate, responseType = ref.responseType, contentType = ref.contentType;
     endpoint = url + this.makeQueryParam();
     binaryResponse = responseType === 'blob';
     this.xmlHttp = new XMLHttpRequest();
@@ -99,7 +98,7 @@ module.exports = Request = (function() {
     })(this), timeout);
     this.xmlHttp.onreadystatechange = (function(_this) {
       return function() {
-        var alert, e, responseData, status;
+        var e, responseData, status;
         if (_this.xmlHttp.readyState === 4) {
           clearTimeout(requestTimer);
           try {
@@ -116,16 +115,16 @@ module.exports = Request = (function() {
             if (typeof _this.errorCB === "function") {
               _this.errorCB(_this.xmlHttp.status, _this.xmlHttp, responseData);
             }
-            if (status === 401 || status === 503) {
-              alert = {
-                isAlert: true
-              };
-              if (_this.xmlHttp.status === 401) {
-                alert.message = 'Error';
-              }
-              if (_this.xmlHttp.status === 503) {
-                alert.message = 'Error';
-              }
+            return typeof _this.finishedCB === "function" ? _this.finishedCB() : void 0;
+          } else {
+            if (typeof success === "function") {
+              success(responseData, status);
+            }
+            if (typeof _this.doneCB === "function") {
+              _this.doneCB(responseData, status);
+            }
+            if (typeof _this.thenCB === "function") {
+              _this.thenCB(responseData, status);
             }
             return typeof _this.finishedCB === "function" ? _this.finishedCB() : void 0;
           }

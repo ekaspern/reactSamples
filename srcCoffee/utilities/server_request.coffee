@@ -11,7 +11,6 @@ module.exports = class Request
     onTimeout: null # Callback for a timeout
     authenticate: true
     responseType: null
-    requestName: null # name the request for use in the global store's active request tracking
     contentType: null
 
     
@@ -40,7 +39,7 @@ module.exports = class Request
     @xmlHttp?.abort()
 
   start: ->
-    {method, data, headers, url, timeout, onTimeout, error, success, requestName,
+    {method, data, headers, url, timeout, onTimeout, error, success,
     authenticate, responseType, contentType} = @options
     endpoint = url + @makeQueryParam()
 
@@ -95,16 +94,14 @@ module.exports = class Request
         if status > 399 or status is 0
           error?(@xmlHttp.status, @xmlHttp, responseData)
           @errorCB?(@xmlHttp.status, @xmlHttp, responseData)
-          
-          if (status is 401 or status is 503)
-            alert =
-              isAlert: yes
-            if @xmlHttp.status is 401 
-              alert.message = 'Error'
-            if @xmlHttp.status is 503
-              alert.message = 'Error'
-            
-          
+                      
+          @finishedCB?()
+        # Success Request
+        else
+          # Run any supplied callback methods
+          success?(responseData, status)
+          @doneCB?(responseData, status)
+          @thenCB?(responseData, status)
           @finishedCB?()
 
 

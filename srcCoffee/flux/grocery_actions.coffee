@@ -12,7 +12,6 @@ module.exports =
     'addGroceryListItem': 'addGroceryListItem'
     
   getGroceryStores: (cb) -> 
-    console.log "test"
     new Request
       url: "/grocery_stores"
     .done (res) =>
