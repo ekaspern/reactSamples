@@ -34,8 +34,10 @@ App = React.createClass
         }
       ]
 
+    # this will make an XMLHttpRequest - will fail since it does not exist
+    @trigger 'getGroceryStores' 
 
-    @trigger 'getGroceryStores'
+    # using hard coded data
     @trigger 'setGroceryStores', groceryStores
 
 
