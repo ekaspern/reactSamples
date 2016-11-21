@@ -34,7 +34,11 @@ App = React.createClass
         }
       ]
 
+
+    @trigger 'getGroceryStores'
     @trigger 'setGroceryStores', groceryStores
+
+
 
   render: ->
     div {

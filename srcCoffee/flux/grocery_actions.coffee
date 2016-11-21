@@ -1,6 +1,7 @@
-# Request = require '../utilities/server_request'
+Request = require '../utilities/server_request'
 _ = require 'lodash'
 moment = require 'moment'
+http = require 'http'
 
 module.exports = 
 
@@ -9,7 +10,8 @@ module.exports =
     'setGroceryStores': 'setGroceryStores'
     'setGroceryList': 'setGroceryList'
     
-  getGroceryStores: (data, cb)-> 
+  getGroceryStores: (cb) -> 
+    console.log "test"
     new Request
       url: "/grocery_stores"
     .done (res) =>

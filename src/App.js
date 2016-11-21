@@ -30,6 +30,7 @@ App = React.createClass({
         products: ['Potato Chips', 'Trail Mix', 'Seltzer']
       }
     ];
+    this.trigger('getGroceryStores');
     return this.trigger('setGroceryStores', groceryStores);
   },
   render: function() {

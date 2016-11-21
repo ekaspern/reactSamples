@@ -1,8 +1,12 @@
-var _, moment;
+var Request, _, http, moment;
+
+Request = require('../utilities/server_request');
 
 _ = require('lodash');
 
 moment = require('moment');
+
+http = require('http');
 
 module.exports = {
   viewTriggers: {
@@ -10,7 +14,8 @@ module.exports = {
     'setGroceryStores': 'setGroceryStores',
     'setGroceryList': 'setGroceryList'
   },
-  getGroceryStores: function(data, cb) {
+  getGroceryStores: function(cb) {
+    console.log("test");
     return new Request({
       url: "/grocery_stores"
     }).done((function(_this) {
