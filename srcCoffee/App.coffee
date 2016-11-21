@@ -1,5 +1,5 @@
 React = require 'react'
-# GroceryList = require('./groceryList').f
+{Flux} = require 'delorean'
 Groceries = require('./groceries').f
 require '../css/App.css'
 
@@ -7,6 +7,34 @@ require '../css/App.css'
 
 
 App = React.createClass
+
+  mixins: [Flux.mixins.storeListener]
+
+  watchStores: ['grocery']
+
+  componentWillMount: ->
+
+    # since I have no api to call I am going to set the store with the data when the app mounts
+
+    groceryStores = [
+        {
+          id: 1
+          name: 'Whole Foods'
+          products: ['Peanut Butter', 'Eggs', 'Yogurt']
+        },
+        {
+          id: 2
+          name: 'Harvest Coop'
+          products: ['Hummus', 'Ice cream', 'Bread']
+        },
+        {
+          id: 3
+          name: 'Trader Joes'
+          products: ['Potato Chips', 'Trail Mix', 'Seltzer']
+        }
+      ]
+
+    @trigger 'setGroceryStores', groceryStores
 
   render: ->
     div {

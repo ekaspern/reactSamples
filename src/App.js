@@ -1,6 +1,8 @@
-var App, Groceries, React, div, h2, ref;
+var App, Flux, Groceries, React, div, h2, ref;
 
 React = require('react');
+
+Flux = require('delorean').Flux;
 
 Groceries = require('./groceries').f;
 
@@ -9,6 +11,27 @@ require('../css/App.css');
 ref = React.DOM, div = ref.div, h2 = ref.h2;
 
 App = React.createClass({
+  mixins: [Flux.mixins.storeListener],
+  watchStores: ['grocery'],
+  componentWillMount: function() {
+    var groceryStores;
+    groceryStores = [
+      {
+        id: 1,
+        name: 'Whole Foods',
+        products: ['Peanut Butter', 'Eggs', 'Yogurt']
+      }, {
+        id: 2,
+        name: 'Harvest Coop',
+        products: ['Hummus', 'Ice cream', 'Bread']
+      }, {
+        id: 3,
+        name: 'Trader Joes',
+        products: ['Potato Chips', 'Trail Mix', 'Seltzer']
+      }
+    ];
+    return this.trigger('setGroceryStores', groceryStores);
+  },
   render: function() {
     return div({
       key: "app",

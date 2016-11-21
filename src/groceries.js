@@ -1,35 +1,21 @@
-var Groceries, Grocery, React, div;
+var Flux, Groceries, Grocery, React, div;
 
 React = require('react');
 
 Grocery = require('./grocery').f;
 
+Flux = require('delorean').Flux;
+
 div = React.DOM.div;
 
 Groceries = React.createClass({
+  mixins: [Flux.mixins.storeListener],
+  watchStores: ['grocery'],
   displayName: 'Groceries',
-  getInitialState: function() {
-    return {
-      groceryStores: [
-        {
-          id: 1,
-          name: 'Whole Foods',
-          products: ['Peanut Butter', 'Eggs', 'Yogurt']
-        }, {
-          id: 2,
-          name: 'Harvest Coop',
-          products: ['Hummus', 'Ice cream', 'Bread']
-        }, {
-          id: 3,
-          name: 'Trader Joes',
-          products: ['Potato Chips', 'Trail Mix', 'Seltzer']
-        }
-      ]
-    };
-  },
   render: function() {
     var groceryStores, i, id, len, store, stores;
-    groceryStores = this.state.groceryStores;
+    groceryStores = this.getStore('grocery').groceryStores;
+    console.log("groceryStores", groceryStores);
     stores = [];
     for (i = 0, len = groceryStores.length; i < len; i++) {
       store = groceryStores[i];

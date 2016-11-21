@@ -205,3 +205,13 @@ scripts": {
     "client-compiler": "gulp client-compiler",...}
 
 The client-compiler will run the coffe-watch and recompile the coffeescript if it changes. 
+
+
+Now we need to install delorean to use Flux
+
+npm install --save delorean
+
+I use lodash so install it as a dependency not just a dev dependency
+
+npm install —save lodash
+npm install —save moment
